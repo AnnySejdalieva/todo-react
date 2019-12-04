@@ -242,7 +242,13 @@ const initialState = {
             ]
         }
     ],
-    items: []
+    tasks: [
+        {title: 'drink coffee', done: false},
+        {title: 'drink coffee', done: false},
+        {title: 'drink coffeeCategory 1.1', done: false},
+        {title: 'drink coffee', done: false},
+        {title: 'drink coffeeCategory 1.1', done: false},
+    ]
 };
 
 const reducer = (state = initialState, action) => {
@@ -256,7 +262,7 @@ const reducer = (state = initialState, action) => {
             console.log(action)
             return {
                 categories:  state.categories,
-                items: action.payload
+                tasks: action.payload
             };
         default:
             return state;

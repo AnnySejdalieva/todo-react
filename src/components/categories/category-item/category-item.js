@@ -10,7 +10,7 @@ class CategoryItem extends Component {
     render() {
 
         const { item, updateItems } = this.props
-        console.log(updateItems)
+        console.log(item, updateItems)
         return(
             <li className="list-group-item">
                 <div className='d-flex justify-content-between' onClick={()=> {updateItems(item.items)}}>
@@ -24,7 +24,8 @@ class CategoryItem extends Component {
                 <ul className="list-group list-group-flush">
                     {
                         item.categories.map((item, i)=>{
-                            return <CategoryItem item={item} key={i}/>
+                            console.log(item)
+                            return <CategoryItem item={item} key={i} updateItems={this.props.updateItems}/>
                         })
                     }
                 </ul>
