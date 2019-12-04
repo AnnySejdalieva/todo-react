@@ -1,6 +1,6 @@
 import React from 'react'
-import CategoryHeader from "./category-header";
-import CategoryList from "./category-list";
+import CategoryHeader from "../categories/category-header/category-header";
+import CategoryList from "../categories/category-list/category-list";
 
 const CategoryContainer = () => {
 

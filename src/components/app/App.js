@@ -1,6 +1,6 @@
 import React from 'react'
-import CategoryContainer from "../categories/category-container";
-import TasksContainer from "../tasks/tasks-container";
+import CategoryContainer from "../containers/category-container";
+import TasksContainer from "../containers/tasks-container";
 import './app.css'
 
 const App = () => {

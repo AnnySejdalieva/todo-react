@@ -1,10 +1,3 @@
-const updateItems = (newItems) => {
-    return {
-        type: 'UPDATE_ITEMS',
-        payload: newItems
-    };
-};
+export const UPDATE_ITEMS = 'UPDATE_ITEMS'
 
-export {
-    updateItems
-};
+export const updateItems = (payload) => ({ type: 'UPDATE_ITEMS', payload })

@@ -1,6 +1,6 @@
 import React from 'react'
-import TasksHeader from "./tasks-header";
-import TasksList from "./tasks-list";
+import TasksHeader from "../tasks/tasks-header/tasks-header";
+import TasksList from "../tasks/tasks-list/tasks-list";
 
 const TasksContainer = () => {
 

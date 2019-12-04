@@ -1,5 +1,5 @@
 import React from 'react'
-import CloseIcon from "../../svg/closeIcon";
+import CloseIcon from "../../../svg/closeIcon";
 import './tasks-header.css'
 
 const TasksHeader = () => {
