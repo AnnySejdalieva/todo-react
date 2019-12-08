@@ -1,0 +1,9 @@
+.tasks-item {
+    list-style: none;
+    padding: 16px;
+    border-top: 1px solid #c3c3c3;
+}
+
+.tasks-item-checkbox{
+    margin-right: 10px;
+}

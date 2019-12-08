@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react'
 import CloseIcon from "../../../svg/closeIcon";
 import './tasks-header.css'
+import { addTaskToCurrentList } from '../../../store/action'
+import { connect } from 'react-redux'
 
-const TasksHeader = () => {
-    return (
+class TasksHeader extends Component{
+    state = {
+        textSearch: ''
+    }
+    onSearch(e) {
+        this.setState({textSearch: e.target.value})
+        this.props.addTaskToCurrentList(e.target.value)
+    }
+    render() {
+        return (
         <div className='TasksHeader'>
             <form className="form-inline">
                 <div className="form-check mb-2 mr-sm-2">
@@ -19,11 +29,20 @@ const TasksHeader = () => {
                 </div>
 
                 <input type="text" className="form-control mb-2 mr-sm-2"
-                       placeholder="Text input with button"/>
-               <button type="submit" className="btn btn-primary mb-2">Add</button>
+                       placeholder="Text input with button"
+                       onChange={(e)=> this.onSearch(e)}
+                       value={this.state.textSearch} />
+                <button type="submit" className="btn btn-primary mb-2">Add</button>
             </form>
         </div>
-           )
+    )
+    }
+
+
 }
 
-export default TasksHeader
+const mapDispatchToProps = {
+    addTaskToCurrentList
+}
+
+export default connect(mapDispatchToProps)(TasksHeader)

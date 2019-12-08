@@ -4,28 +4,34 @@ import DeleteIcon from "../../../svg/deleteIcon";
 import AddItemIcon from "../../../svg/AddItemIcons";
 import { connect } from 'react-redux';
 import { updateItems } from "../../../store/action";
-
+import './category-item.css'
 
 class CategoryItem extends Component {
-    render() {
+    componentDidMount() {
 
-        const { item, updateItems } = this.props
-        console.log(item, updateItems)
+    }
+
+    addCategory = () => {
+        console.log('addItem')
+    }
+    render() {
+        const { item, updateItems, categories } = this.props
         return(
-            <li className="list-group-item">
-                <div className='d-flex justify-content-between' onClick={()=> {updateItems(item.items)}}>
+            <li className="category-item">
+                <div className='d-flex justify-content-between' onClick={()=>{updateItems(item.id)}}>
                     <div>{item.title}</div>
                     <div>
                         <RefactorIcon/>
                         <DeleteIcon/>
-                        <AddItemIcon/>
+                        <AddItemIcon onClick={()=> {this.addCategory()}}/>
                     </div>
                 </div>
                 <ul className="list-group list-group-flush">
                     {
-                        item.categories.map((item, i)=>{
-                            console.log(item)
-                            return <CategoryItem item={item} key={i} updateItems={this.props.updateItems}/>
+                        categories.map((category, i)=>{
+                            if (category.parent === item.id) {
+                                return <CategoryItem categories={categories} item={item} key={i} updateItems={this.props.updateItems}/>
+                            }
                         })
                     }
                 </ul>

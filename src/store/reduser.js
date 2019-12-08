@@ -1,268 +1,100 @@
 const initialState = {
     categories: [
         {
-            categories : [
-                {
-                    categories : [
-                        {
-                            categories : [
-                            ],
-                            title: 'Category 1.1.1',
-                            items: [
-                                {title: 'drink coffee Category 1.1.1', done: false},
-                                {title: 'drink coffeeCategory 1.1.1', done: false},
-                                {title: 'drink coffeeCategory 1.1.1', done: false},
-                                {title: 'drink coffeeCategory 1.1.1', done: false},
-                                {title: 'drink coffeevCategory 1.1.1', done: false},
-                            ]
-                        },
-                        {
-                            categories : [
-                            ],
-                            title: 'Category 1.1.2',
-                            items: [
-                                {title: 'drink coffeeCategory 1.1.2', done: false},
-                                {title: 'drink coffee', done: false},
-                                {title: 'drink coffeeCategory 1.1.2', done: false},
-                                {title: 'drink coffee', done: false},
-                                {title: 'drink coffee', done: false},
-                            ]
-                        }
-
-                    ],
-                    title: 'Category 1.1',
-                    items: [
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffeeCategory 1.1', done: false},
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffeeCategory 1.1', done: false},
-                    ]                }
-            ],
+            id: '1',
+            parent: null,
             title: 'Category 1',
-            items: [
-                {title: 'drink coffee', done: false},
-                {title: 'drink coffeeCategory 1', done: false},
-                {title: 'drink coffee', done: false},
-                {title: 'drink coffeeCategory 1', done: false},
-                {title: 'drink coffee', done: false},
-            ]
         },
         {
-            categories : [
-                {
-                    categories : [
-                        {
-                            categories : [
-                            ],
-                            title: 'Category 2.1.1',
-                            items: [
-                                {title: 'drink coffee Category 2.1.1', done: false},
-                                {title: 'drink coffeeCategory 2.1.1', done: false},
-                                {title: 'drink coffeeCategory 2.1.1', done: false},
-                                {title: 'drink coffeeCategory 2.1.1', done: false},
-                                {title: 'drink coffeevCategory 2.1.1', done: false},
-                            ]
-                        }
-
-                    ],
-                    title: 'Category 2.1',
-                    items: [
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffeeCategory 2.1', done: false},
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffeeCategory 2.1', done: false},
-                    ]
-                },
-                {
-                    categories : [
-                    ],
-                    title: 'Category 2.2',
-                    items: [
-                        {title: 'drink coffeeCategory 2.2', done: false},
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffeeCategory 2.2', done: false},
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffee', done: false},
-                    ]
-                }
-            ],
+            id: '2',
+            parent: '1',
+            title: 'Category 1.1'
+        },
+        {
+            id: '3',
+            parent: '2',
+            title: 'Category 1.1.1',
+        },
+        {
+            id: '4',
+            parent: null,
             title: 'Category 2',
-            items: [
-                {title: 'drink coffee', done: false},
-                {title: 'drink coffeeCategory 2', done: false},
-                {title: 'drink coffee', done: false},
-                {title: 'drink coffeeCategory 2', done: false},
-                {title: 'drink coffee', done: false},
-            ]
         },
         {
-            categories : [
-                {
-                    categories : [
-                        {
-                            categories : [
-                            ],
-                            title: 'Category 1.1.1',
-                            items: [
-                                {title: 'drink coffee Category 1.1.1', done: false},
-                                {title: 'drink coffeeCategory 1.1.1', done: false},
-                                {title: 'drink coffeeCategory 1.1.1', done: false},
-                                {title: 'drink coffeeCategory 1.1.1', done: false},
-                                {title: 'drink coffeevCategory 1.1.1', done: false},
-                            ]
-                        },
-                        {
-                            categories : [
-                            ],
-                            title: 'Category 1.1.2',
-                            items: [
-                                {title: 'drink coffeeCategory 1.1.2', done: false},
-                                {title: 'drink coffee', done: false},
-                                {title: 'drink coffeeCategory 1.1.2', done: false},
-                                {title: 'drink coffee', done: false},
-                                {title: 'drink coffee', done: false},
-                            ]
-                        }
-
-                    ],
-                    title: 'Category 1.1',
-                    items: [
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffeeCategory 1.1', done: false},
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffeeCategory 1.1', done: false},
-                    ]                }
-            ],
-            title: 'Category 3',
-            items: [
-                {title: 'drink coffee', done: false},
-                {title: 'drink coffeeCategory 3', done: false},
-                {title: 'drink coffee', done: false},
-                {title: 'drink coffeeCategory 3', done: false},
-                {title: 'drink coffee', done: false},
-            ]
+            id:'5',
+            parent: '4',
+            title: 'Category 2.1',
         },
         {
-            categories : [
-                {
-                    categories : [
-                        {
-                            categories : [
-                            ],
-                            title: 'Category 1.1.1',
-                            items: [
-                                {title: 'drink coffee Category 1.1.1', done: false},
-                                {title: 'drink coffeeCategory 1.1.1', done: false},
-                                {title: 'drink coffeeCategory 1.1.1', done: false},
-                                {title: 'drink coffeeCategory 1.1.1', done: false},
-                                {title: 'drink coffeevCategory 1.1.1', done: false},
-                            ]
-                        },
-                        {
-                            categories : [
-                            ],
-                            title: 'Category 1.1.2',
-                            items: [
-                                {title: 'drink coffeeCategory 1.1.2', done: false},
-                                {title: 'drink coffee', done: false},
-                                {title: 'drink coffeeCategory 1.1.2', done: false},
-                                {title: 'drink coffee', done: false},
-                                {title: 'drink coffee', done: false},
-                            ]
-                        }
-
-                    ],
-                    title: 'Category 1.1',
-                    items: [
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffeeCategory 1.1', done: false},
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffeeCategory 1.1', done: false},
-                    ]                }
-            ],
-            title: 'Category 4',
-            items: [
-                {title: 'drink coffee', done: false},
-                {title: 'drink coffeeCategory 4', done: false},
-                {title: 'drink coffee', done: false},
-                {title: 'drink coffeeCategory 4', done: false},
-                {title: 'drink coffee', done: false},
-            ]
-        },
-        {
-            categories : [
-                {
-                    categories : [
-                        {
-                            categories : [
-                            ],
-                            title: 'Category 1.1.1',
-                            items: [
-                                {title: 'drink coffee Category 1.1.1', done: false},
-                                {title: 'drink coffeeCategory 1.1.1', done: false},
-                                {title: 'drink coffeeCategory 1.1.1', done: false},
-                                {title: 'drink coffeeCategory 1.1.1', done: false},
-                                {title: 'drink coffeevCategory 1.1.1', done: false},
-                            ]
-                        },
-                        {
-                            categories : [
-                            ],
-                            title: 'Category 1.1.2',
-                            items: [
-                                {title: 'drink coffeeCategory 1.1.2', done: false},
-                                {title: 'drink coffee', done: false},
-                                {title: 'drink coffeeCategory 1.1.2', done: false},
-                                {title: 'drink coffee', done: false},
-                                {title: 'drink coffee', done: false},
-                            ]
-                        }
-
-                    ],
-                    title: 'Category 1.1',
-                    items: [
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffeeCategory 1.1', done: false},
-                        {title: 'drink coffee', done: false},
-                        {title: 'drink coffeeCategory 1.1', done: false},
-                    ]                }
-            ],
-            title: 'Category 5',
-            items: [
-                {title: 'drink coffee', done: false},
-                {title: 'drink coffeeCategory 5', done: false},
-                {title: 'drink coffee', done: false},
-                {title: 'drink coffeeCategory 5', done: false},
-                {title: 'drink coffee', done: false},
-            ]
+            id: '6',
+            parent: '4',
+            title: 'Category 2.2',
         }
+
     ],
-    tasks: [
-        {title: 'drink coffee', done: false},
-        {title: 'drink coffee', done: false},
-        {title: 'drink coffeeCategory 1.1', done: false},
-        {title: 'drink coffee', done: false},
-        {title: 'drink coffeeCategory 1.1', done: false},
-    ]
+    tasks: {
+        1: [
+            {title: 'drink coffee categoryyy', done: false},
+            {title: 'drink coffee', done: true},
+            {title: 'drink coffeeCategory 1', done: false},
+            {title: 'drink coffee', done: false},
+            {title: 'drink coffeeCategory 1', done: false}
+        ],
+        2: [
+            {title: 'drink coffee', done: false},
+            {title: 'drink coffee', done: false},
+            {title: 'drink coffeeCategory 1.1', done: false},
+            {title: 'drink coffee', done: false},
+            {title: 'drink coffeeCategory 1.1', done: false}
+        ],
+        3: [
+            {title: 'drink coffeeCategory 1.1.2', done: true},
+            {title: 'drink coffee', done: false},
+            {title: 'drink coffeeCategory 1.1.2', done: false},
+            {title: 'drink coffee', done: true},
+            {title: 'drink coffee', done: false}
+        ],
+        4: [
+            {title: 'drink coffee', done: false},
+            {title: 'drink coffeeCategory 2', done: true},
+            {title: 'drink coffee', done: false},
+            {title: 'drink coffeeCategory 2', done: false},
+            {title: 'drink coffee', done: false}
+        ],
+        5: [
+            {title: 'drink coffee', done: false},
+            {title: 'drink coffee', done: false},
+            {title: 'drink coffeeCategory 2.1', done: false},
+            {title: 'drink coffee', done: false},
+            {title: 'drink coffeeCategory 2.1', done: true}
+        ],
+        6: [
+            {title: 'drink coffeeCategory 2.2', done: true},
+            {title: 'drink coffee', done: false},
+            {title: 'drink coffeeCategory 2.2', done: false},
+            {title: 'drink coffee', done: false},
+            {title: 'drink coffee', done: false}
+        ]
+
+    },
+    currentCategory: ''
 };
 
 const reducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case 'ADD_ITEM':
+        case 'ADD_TASK_TO_CURRENT_LIST':
+            let list = state.tasks[state.currentCategory]
+                .push(action.payload)
             return {
-                categories:  [...state.items,action.payload]
+                ...state,
+                tasks:  [...state.tasks, list]
             };
         case 'UPDATE_ITEMS':
             console.log(action)
             return {
-                categories:  state.categories,
-                tasks: action.payload
+                ...state,
+                currentCategory: action.payload
             };
         default:
             return state;

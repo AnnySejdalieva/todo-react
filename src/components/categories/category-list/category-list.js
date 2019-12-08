@@ -11,8 +11,10 @@ class CategoryList extends Component {
         return(
             <ul className="list-group list-group-flush">
                 {
-                    categories.map((category, i)=>{
-                        return <CategoryItem key={i} item={category}/>
+                    categories.map((category, i) => {
+                        if(category.parent === null) {
+                            return <CategoryItem categories={categories} key={i} item={category}/>
+                        }
                     })
                 }
             </ul>
