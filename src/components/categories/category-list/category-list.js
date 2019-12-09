@@ -1,23 +1,19 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import CategoryItem from "../category-item/category-item";
+class CategoryList extends PureComponent {
 
-class CategoryList extends Component {
-    state = {
-
-    }
     render() {
-        let categories = this.props.categories.filter((el)=> el.parent === null)
-        console.log(categories)
-        return(
-            <ul className="list-group list-group-flush">
-                {
-                    this.props.categories
-                        .filter(i => i.parent === null)
-                        .map(i => <CategoryItem categories={this.props.categories} item={i}/>)
-                }
-            </ul>
-        )
+        let newArr = this.props.categories
+            .filter(i => i.parent === this.props.categoryParent)
+            return(
+                <ul className="list-group list-group-flush">
+                    {
+                        newArr.map((item,i) => <CategoryItem categories={this.props.categories} key={i} item={item}/>)
+                    }
+                </ul>
+            )
+
     }
 }
 

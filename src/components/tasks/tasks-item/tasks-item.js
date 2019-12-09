@@ -29,7 +29,6 @@ class TasksItem extends Component {
 
     render() {
         const { task } = this.props
-        console.log(this.state.done)
         return(
             <li className="tasks-item">
                 <div className='d-flex justify-content-between'>

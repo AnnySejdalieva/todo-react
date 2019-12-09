@@ -11,7 +11,7 @@ const CategoryContainer = () => {
                         <CategoryHeader/>
                     </div>
                     <div>
-                        <CategoryList/>
+                        <CategoryList categoryParent={null}/>
                     </div>
                 </div>
             </div>

@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { Component } from 'react'
+import AddForm from "../../lib/addForm";
+import {connect} from "react-redux";
 
-const CategoryHeader = () => {
-    return(
-        <div className='CategoryHeader'>
-            <form className="form-inline">
-                <div className="form-group mx-sm-3 mb-2">
-                    <input type="password" className="form-control" placeholder="Enter category title"/>
-                </div>
-                <button type="submit" className="btn btn-primary mb-2">Add</button>
-            </form>
-        </div>
-    )
+class CategoryHeader extends Component{
+    render() {
+        return(
+            <div className='CategoryHeader'>
+                <AddForm placeholder={'Enter category title'} type={'category'} items={this.props.categories} parentCategory={null}/>
+            </div>
+        )
+    }
 }
 
-export default CategoryHeader
+
+const mapStateToProps = ({categories}) => {
+    return { categories }
+}
+
+export default connect(mapStateToProps)(CategoryHeader)
