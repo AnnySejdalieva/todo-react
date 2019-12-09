@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from "react-redux";
-import TasksItem from "../tasks-item";
+// import TasksItem from "../tasks-item";
 
 class TasksList extends Component{
     state = {
@@ -26,16 +26,16 @@ class TasksList extends Component{
     }
 
     render() {
-        const { tasks, currentCategory } = this.props
+        // const { tasks, currentCategory } = this.props
         return(
             <ul className="list-group list-group-flush">
-                {
-                    tasks[currentCategory].map((task, key)=>{
-                        return (
-                                <TasksItem isDone={()=>{this.isDone(key)}} task={task} key={key}/>
-                                )
-                    })
-                }
+                {/*{*/}
+                {/*    tasks[currentCategory].map((task, key)=>{*/}
+                {/*        return (*/}
+                {/*                <TasksItem isDone={()=>{this.isDone(key)}} task={task} key={key}/>*/}
+                {/*                )*/}
+                {/*    })*/}
+                {/*}*/}
             </ul>
         )
     }

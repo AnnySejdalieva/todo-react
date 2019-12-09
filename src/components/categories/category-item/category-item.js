@@ -15,7 +15,10 @@ class CategoryItem extends Component {
         console.log('addItem')
     }
     render() {
-        const { item, updateItems, categories } = this.props
+        const { item, updateItems } = this.props
+
+        console.log(item)
+
         return(
             <li className="category-item">
                 <div className='d-flex justify-content-between' onClick={()=>{updateItems(item.id)}}>
@@ -28,22 +31,13 @@ class CategoryItem extends Component {
                 </div>
                 <ul className="list-group list-group-flush">
                     {
-                        categories.map((category, i)=>{
-                            if (category.parent === item.id) {
-                                return <CategoryItem categories={categories} item={item} key={i} updateItems={this.props.updateItems}/>
-                            }
-                        })
+                        this.props.categories
+                            .filter(i => i.parent === this.props.item.id)
+                            .map(i => <CategoryItem categories={this.props.categories} item={item} key={i} updateItems={this.props.updateItems}/>)
                     }
                 </ul>
             </li>
         )
-    }
-
-}
-
-const mapStateToProps = ({items}) =>{
-    return {
-        items
     }
 }
 
@@ -51,4 +45,4 @@ const mapDispatchToProps = {
     updateItems
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryItem)
+export default connect(null, mapDispatchToProps)(CategoryItem)

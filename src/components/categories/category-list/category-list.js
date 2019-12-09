@@ -7,15 +7,14 @@ class CategoryList extends Component {
 
     }
     render() {
-        const { categories } = this.props
+        let categories = this.props.categories.filter((el)=> el.parent === null)
+        console.log(categories)
         return(
             <ul className="list-group list-group-flush">
                 {
-                    categories.map((category, i) => {
-                        if(category.parent === null) {
-                            return <CategoryItem categories={categories} key={i} item={category}/>
-                        }
-                    })
+                    this.props.categories
+                        .filter(i => i.parent === null)
+                        .map(i => <CategoryItem categories={this.props.categories} item={i}/>)
                 }
             </ul>
         )

@@ -10,9 +10,12 @@ class TasksHeader extends Component{
     }
     onSearch(e) {
         this.setState({textSearch: e.target.value})
-        this.props.addTaskToCurrentList(e.target.value)
+        console.log(this.state.textSearch, e.target.value)
+
+        // this.props.addTaskToCurrentList(e.target.value)
     }
     render() {
+        console.log(this.state.textSearch)
         return (
         <div className='TasksHeader'>
             <form className="form-inline">
@@ -45,4 +48,4 @@ const mapDispatchToProps = {
     addTaskToCurrentList
 }
 
-export default connect(mapDispatchToProps)(TasksHeader)
+export default connect(null, mapDispatchToProps)(TasksHeader)
