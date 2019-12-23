@@ -3,46 +3,90 @@ import RefactorIcon from "../../../svg/refactorIcon";
 import DeleteIcon from "../../../svg/deleteIcon";
 import AddItemIcon from "../../../svg/AddItemIcons";
 import { connect } from 'react-redux';
-import { updateItems } from "../../../store/action";
+import { updateItems, changeCategory, addCategory, deleteCategory, changeModal } from "../../../store/action";
 import './category-item.css'
-import CategoryList from "../category-list/category-list";
+import PropTypes from "prop-types";
 
 class CategoryItem extends PureComponent {
-    addCategory = () => {
-        console.log('addItem')
+    constructor(props) {
+        super(props)
+        this.addCategory=this.addCategory.bind(this)
     }
-    constructListItem = () => {
-        let newArr = this.props.categories
-            .filter(i => i.parent === this.props.item.id)
-        console.log(newArr)
-        if (newArr.length > 0 && typeof newArr.length !== 'undefined') {
-            return <CategoryList categoryParent={this.props.item.id}/>
-        } else {
-            return <div/>
-        }
+    componentDidMount() {
+        let arr = this.props.categories.filter(el=>el.parent === this.props.item.id)
+        this.setState({child: [...arr]})
     }
-    render() {
-        const { item, updateItems } = this.props
 
-        console.log(item)
+    addCategory () {
+        console.log('addItem')
+        let keys = []
+        this.props.categories.map((el)=>keys.push(el.id))
+        let id = Math.max(...keys)
+        console.log(id+1)
+        let bros = this.props.categories.filter((i)=> i.parent === this.props.item.id)
+
+        this.props.addCategory({id: ++id, parent:this.props.item.id, title:this.props.item.title+' '+(bros.length+1)})
+    }
+
+    render() {
+        const { item, updateItems, deleteCategory, changeModal, categories, addCategory } = this.props
+        let arr = categories.filter(el=>el.parent === item.id)
+        console.log(arr)
         return(
             <li className="category-item">
-                <div className='d-flex justify-content-between' onClick={()=>{updateItems(item.id)}}>
-                    <div>{item.title}</div>
-                    <div>
-                        <RefactorIcon/>
-                        <DeleteIcon/>
-                        <AddItemIcon onClick={()=> {this.addCategory()}}/>
+                <div>
+                    <div className='d-flex justify-content-between'>
+                        <div onClick={()=>{updateItems(item.id)}}>{item.title}</div>
+                        <div className='d-flex'>
+                            <div onClick={() => {changeModal(item)}}>
+                                <RefactorIcon />
+                            </div>
+                            <div onClick={() => deleteCategory(item.id)}>
+                                <DeleteIcon/>
+                            </div>
+                            <div onClick={()=> {this.addCategory()}}>
+                                <AddItemIcon/>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-                {this.constructListItem()}
+                {
+                    arr.length !== 0 ?
+                    <ul className="list-group list-group-flush">
+                        {
+                            arr.map((item,i) => <CategoryItem
+                                updateItems={updateItems}
+                                deleteCategory={deleteCategory}
+                                changeModal={changeModal}
+                                addCategory={addCategory}
+                                categories={categories}
+                                key={i} item={item}/>)
+                        }
+                    </ul>:<></>
+                }
             </li>
         )
     }
 }
 
+CategoryItem.propTypes = {
+    item: PropTypes.object,
+    changeModal: PropTypes.func,
+    modal: PropTypes.object,
+    updateItems: PropTypes.func,
+    deleteCategory: PropTypes.func,
+    addCategory: PropTypes.func,
+    changeCategory: PropTypes.func,
+    categories: PropTypes.array
+}
+
 const mapDispatchToProps = {
-    updateItems
+    updateItems,
+    changeCategory,
+    changeModal,
+    addCategory,
+    deleteCategory
 };
 
 export default connect(null, mapDispatchToProps)(CategoryItem)

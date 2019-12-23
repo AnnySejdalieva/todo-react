@@ -6,3 +6,12 @@ export const addCategory = (payload) =>({ type: 'ADD_CATEGORY', payload: payload
 
 export const showOnlyDone = () => ({ type: 'SHOW_ONLY_DONE' })
 
+export const changeTask = (payload) => ({ type: 'CHANGE_TASK', payload: payload })
+
+export const changeCategory = (payload) => ({ type: 'CHANGE_CATEGORY', payload: payload })
+
+export const deleteCategory = (payload) => ({ type: 'DELETE_CATEGORY', payload: payload })
+
+export const changeModal = (payload) => ({type: 'CHANGE_MODAL', payload: payload})
+
+export const changeSearch = (payload) => ({type: 'CHANGE_SEARCH', payload: payload})

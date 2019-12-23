@@ -1,10 +1,16 @@
 import React, { Component } from "react";
-import {addCategory, addTask} from "../../store/action";
+import {addCategory, addTask} from "../../../store/action";
 import {connect} from "react-redux";
+import PropTypes from "prop-types";
 
 class AddForm extends Component {
-    state = {
-        titleItem: ''
+    constructor(props) {
+        super(props)
+        this.state = {
+            titleItem: ''
+        }
+        this.addItem=this.addItem.bind(this)
+        this.onChangeInp=this.onChangeInp.bind(this)
     }
     addItem(e) {
         e.preventDefault()
@@ -41,6 +47,17 @@ class AddForm extends Component {
     }
 
 }
+
+AddForm.propTypes = {
+    placeholder: PropTypes.string,
+    addTask: PropTypes.func,
+    currentCategory: PropTypes.number,
+    addCategory: PropTypes.func,
+    parentCategory: PropTypes.number,
+    items: PropTypes.array,
+    type: PropTypes.string
+}
+
 const mapStateToProps = ({ currentCategory }) => {
     return { currentCategory }
 }

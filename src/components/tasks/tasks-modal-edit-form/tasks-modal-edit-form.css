@@ -1,0 +1,11 @@
+.tasks-modal-edit-form {
+    display: block;
+}
+.tasks-modal-edit-form-block {
+    margin-top: 10px;
+}
+.tasks-modal-edit-form-button {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}

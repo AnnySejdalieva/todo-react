@@ -1,15 +1,4 @@
-.TasksHeaderSearch{
-    max-width: 40%;
-    position: relative;
-}
-
-.TasksHeaderSearch input{
-    border: none;
-    height:100%;
-}
-
-.TasksHeaderSearchIcon {
-    position: absolute;
-    right: 5px;
-    top: 5px;
+.TasksHeader input{
+    margin-right: 6px;
+    outline: none;
 }

@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
-import CloseIcon from "../../../svg/closeIcon";
 import './tasks-header.css'
 import { showOnlyDone } from '../../../store/action'
 import { connect } from 'react-redux'
-import AddForm from "../../lib/addForm";
+import AddForm from "../../lib/add-form";
+import PropTypes from "prop-types";
+import Search from "../../lib/search/search";
 
 class TasksHeader extends Component{
-    state={
-        showDone: false
+    constructor(props) {
+        super(props)
+        this.state={
+            showDone: false
+        }
+        this.changeInputShowDone=this.changeInputShowDone.bind(this)
     }
     componentDidMount() {
         if(typeof this.props.showDone !== 'undefined') {
@@ -15,13 +20,13 @@ class TasksHeader extends Component{
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps) {
         if (this.props.showDone !== prevProps.showDone) {
             this.setState({showDone: this.props.showDone})
         }
     }
 
-    changeInputShowDone = (e) => {
+    changeInputShowDone () {
         let flag = this.state.showDone;
         this.setState( {
             showDone:!flag
@@ -32,28 +37,28 @@ class TasksHeader extends Component{
         return (
         <div className='TasksHeader'>
             <div className="d-flex">
-                <div className="form-check mb-2 mr-sm-2">
-                    <input className="form-check-input"
+                <div>
+                    <input className=""
                            onChange={e=>this.changeInputShowDone(e)}
                            checked={this.state.showDone}
                            type="checkbox" id="inlineFormCheck"/>
-                    <label className="form-check-label" htmlFor="inlineFormCheck">
+                    <label className="" htmlFor="inlineFormCheck">
                         Show done
                     </label>
                 </div>
-                <div className='form-control mb-2 mr-sm-2 TasksHeaderSearch'>
-                    <input type="text"
-                           placeholder="Search"/>
-                    <div className='TasksHeaderSearchIcon'>
-                        <CloseIcon/>
-                    </div>
-                </div>
+                <Search/>
                 <AddForm placeholder={'Text input with button'} type={'task'} items={this.props.tasks}/>
             </div>
-
         </div>
     )
     }
+}
+
+TasksHeader.propTypes = {
+    tasks: PropTypes.array,
+    currentCategory: PropTypes.number,
+    showDone: PropTypes.bool,
+    showOnlyDone: PropTypes.func
 }
 
 const mapStateToProps = ({tasks, currentCategory, showDone}) => {

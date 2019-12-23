@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import CategoryItem from "../category-item/category-item";
-class CategoryList extends PureComponent {
+import PropTypes from "prop-types";
 
+class CategoryList extends PureComponent {
     render() {
         let newArr = this.props.categories
-            .filter(i => i.parent === this.props.categoryParent)
+            .filter(i => i.parent === 0)
+        console.log(this.props.categories)
             return(
                 <ul className="list-group list-group-flush">
                     {
@@ -15,6 +17,11 @@ class CategoryList extends PureComponent {
             )
 
     }
+}
+
+CategoryList.propTypes = {
+    categoryParent: PropTypes.number,
+    categories: PropTypes.array
 }
 
 const mapStateToProps = ({categories}) => {

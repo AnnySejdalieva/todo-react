@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import RefactorIcon from "../../../svg/refactorIcon";
 import './tasks-item.css'
+import { changeModal, changeTask } from '../../../store/action'
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
 
 class TasksItem extends Component {
-    state = {
-        done: false
+    constructor(props) {
+        super(props)
+        this.onClickCheck=this.onClickCheck.bind(this)
     }
     componentDidMount() {
         if(typeof this.props.task.done !== 'undefined') {
@@ -12,32 +16,30 @@ class TasksItem extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps) {
         if (this.props.task.done !== prevProps.task.done) {
             this.setState({done: this.props.task.done})
         }
     }
 
-    onClickCheck(){
-        let flag = this.state.done;
-        this.setState( {
-            done:!flag
-        })
-        this.props.isDone()
+    onClickCheck () {
+        let i = this.props.task
+        i.done = !i.done
+        this.props.changeTask(i)
+        console.log(i)
     }
-
-
     render() {
         const { task } = this.props
+
         return(
             <li className="tasks-item">
                 <div className='d-flex justify-content-between'>
                     <div>
-                        <input onClick={e=>this.onClickCheck(e)} onChange={e=>{}} type={'checkbox'} className='tasks-item-checkbox' checked={this.state.done}/>
+                        <input onChange={e=>this.onClickCheck(e)} type={'checkbox'} className='tasks-item-checkbox' checked={task.done}/>
                         {task.title}
                     </div>
-                    <div>
-                        <RefactorIcon/>
+                    <div onClick={() => this.props.changeModal(task)}>
+                        <RefactorIcon />
                     </div>
                 </div>
             </li>
@@ -45,4 +47,17 @@ class TasksItem extends Component {
     }
 }
 
-export default TasksItem
+TasksItem.propTypes = {
+    modal: PropTypes.object,
+    changeModal: PropTypes.func,
+    changeTask: PropTypes.func,
+    task: PropTypes.object,
+    search: PropTypes.string
+}
+
+const mapDispatchToProps = {
+    changeModal,
+    changeTask
+}
+
+export default connect(null, mapDispatchToProps)(TasksItem)
