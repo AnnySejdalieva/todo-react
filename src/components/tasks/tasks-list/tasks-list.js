@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import TasksItem from "../tasks-item";
 import PropTypes from "prop-types";
 import {createFilter} from "react-search-input";
+import {debounce} from "lodash";
 
 const KEYS_TO_FILTERS = ['title']
 
@@ -12,8 +13,8 @@ class TasksList extends Component{
         this.state = {
             items: []
         }
-        this.updateList=this.updateList.bind(this)
-        this.showOnlyDone=this.showOnlyDone.bind(this)
+        this.updateList = this.updateList.bind(this)
+        this.showOnlyDone = this.showOnlyDone.bind(this)
     }
     componentDidMount() {
         if(this.props.tasks) {
@@ -23,6 +24,7 @@ class TasksList extends Component{
             this.showOnlyDone()
         }
     }
+
     updateList () {
         let list = this.props.tasks
             .filter(el=>el.category === this.props.currentCategory)
@@ -34,20 +36,18 @@ class TasksList extends Component{
         this.setState({items: itemIsDone})
         console.log(this.props.showDone, itemIsDone, this.state)
     }
+
     componentDidUpdate(prevProps) {
         if(this.props.search !== prevProps.search) {
-            let arr = []
-            this.state.items.forEach((el)=>{
-                if (el.title.search(this.props.search) != -1) {
-                    console.log(el.title.search(this.props.search))
-                    arr.push(el)
-                }
-                console.log(arr)
-                // this.setState({
-                //     items: [...arr]
-                // })
-            })
-
+            console.log('search')
+            let filterSearch = debounce(() => {
+                return new Promise((resolve) => {
+                    console.log('debounce')
+                    // переведёт промис в состояние fulfilled с результатом "result"
+                    resolve(this.state.items.filter(createFilter(this.props.search, KEYS_TO_FILTERS)));
+                });
+            }, 500)
+            filterSearch.then(el=>this.setState({items:[...el]}))
         }
         if(this.props.tasks.length !== prevProps.tasks.length) {
             this.updateList()
@@ -63,13 +63,10 @@ class TasksList extends Component{
     }
 
     render() {
-        const filteredTasks = this.state.items.filter(createFilter(this.props.search, KEYS_TO_FILTERS))
-        console.log( filteredTasks)
-
         return(
             <ul className="list-group list-group-flush">
                 {
-                    filteredTasks.map((task, key)=>{
+                    this.state.items.map((task, key)=>{
                         return (
                             <TasksItem isDone={()=>{this.isDone(key)}} task={task} key={key}/>
                             )

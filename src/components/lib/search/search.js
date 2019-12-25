@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import CloseIcon from "../../../svg/closeIcon";
 import PropTypes from "prop-types";
 import { changeSearch } from "../../../store/action";
 import './search.css'
 import { connect } from "react-redux";
 import SearchInput from 'react-search-input'
-import { debounce } from 'lodash'
-
 
 class Search extends Component {
     constructor(props) {
@@ -14,15 +11,15 @@ class Search extends Component {
         this.state = {
             searchTerm: ''
         }
-        this.onChangeInp = debounce((term) => {
+        this.onChangeInp=this.onChangeInp.bind(this)
+    }
+
+    onChangeInp (term) {
             this.setState({
                 searchTerm: term
             })
             this.props.changeSearch(term)
-        }, 500)
     }
-
-
     render() {
 
         return (
