@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { changeSearch } from "../../../store/action";
+import { debounceChangeSearch } from "../../../store/action";
 import './search.css'
 import { connect } from "react-redux";
 import SearchInput from 'react-search-input'
+import { bindActionCreators } from "redux";
 
 class Search extends Component {
     constructor(props) {
@@ -32,14 +33,17 @@ class Search extends Component {
 Search.propTypes = {
     search: PropTypes.string,
     changeSearch: PropTypes.func,
+    debounceChangeSearch: PropTypes.func
 }
 
 const mapStateToProps = ({search}) => {
     return { search }
 }
 
-const mapDispatchToProps = {
-    changeSearch
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        changeSearch: debounceChangeSearch()
+    }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search)

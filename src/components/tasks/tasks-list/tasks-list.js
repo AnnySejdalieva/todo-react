@@ -11,10 +11,23 @@ class TasksList extends Component{
     constructor(props) {
         super(props)
         this.state = {
-            items: []
+            items: [],
+            a: 0
         }
         this.updateList = this.updateList.bind(this)
         this.showOnlyDone = this.showOnlyDone.bind(this)
+        this.filterSearch = async() => {
+            return new Promise((resolve) => {
+                resolve(this.state.items.filter(createFilter(this.props.search, KEYS_TO_FILTERS)));
+            });
+        };
+        this.debounced = debounce(async () => {
+            this.state.a = 1;
+            const filter = await this.filterSearch();
+            console.log(filter)
+            this.setState({ items: [...filter], a:this.state.a + 1 });
+            return filter;
+        }, 500);
     }
     componentDidMount() {
         if(this.props.tasks) {
@@ -37,17 +50,9 @@ class TasksList extends Component{
         console.log(this.props.showDone, itemIsDone, this.state)
     }
 
-    componentDidUpdate(prevProps) {
+    async componentDidUpdate(prevProps) {
         if(this.props.search !== prevProps.search) {
-            console.log('search')
-            let filterSearch = debounce(() => {
-                return new Promise((resolve) => {
-                    console.log('debounce')
-                    // переведёт промис в состояние fulfilled с результатом "result"
-                    resolve(this.state.items.filter(createFilter(this.props.search, KEYS_TO_FILTERS)));
-                });
-            }, 500)
-            filterSearch.then(el=>this.setState({items:[...el]}))
+            await this.debounced();
         }
         if(this.props.tasks.length !== prevProps.tasks.length) {
             this.updateList()
