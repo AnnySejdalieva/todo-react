@@ -1,4 +1,4 @@
-import {debounce} from 'lodash'
+import {debounce} from "lodash";
 
 export const updateItems = (payload) => ({ type: 'UPDATE_ITEMS', payload })
 
@@ -16,9 +16,17 @@ export const deleteCategory = (payload) => ({ type: 'DELETE_CATEGORY', payload: 
 
 export const changeModal = (payload) => ({type: 'CHANGE_MODAL', payload: payload})
 
-export const changeSearch = (payload) =>({type: 'CHANGE_SEARCH', payload: payload})
+export const changeSearch = (payload) => ({type: 'CHANGE_SEARCH', payload: payload})
 
-export const debounceChangeSearch = () => debounce((payload, dispatch) => {
-    console.log('CHANGE_SEARCH')
-    dispatch(changeModal())
-}, 1000)
+export const startLoading = () => ({type: 'START_LOADING'})
+
+export const finishLoading = () => ({type: 'FINISH_LOADING'})
+
+const delayedAction = (timeout, action, payload) => (dispatch) => debounce(()=>{
+    dispatch(action(payload))
+}, timeout)
+
+export const debounceChangeSearch = (payload) => (dispatch) => () => {
+    dispatch(startLoading())
+    delayedAction(1000, changeSearch, payload)(dispatch)()
+}

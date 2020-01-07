@@ -52,12 +52,16 @@ TasksItem.propTypes = {
     changeModal: PropTypes.func,
     changeTask: PropTypes.func,
     task: PropTypes.object,
-    search: PropTypes.string
+    search: PropTypes.string,
+    tasks: PropTypes.array
 }
 
+const mapStateToProps = ({ tasks, currentCategory}) => {
+    return { tasks, currentCategory }
+}
 const mapDispatchToProps = {
     changeModal,
     changeTask
 }
 
-export default connect(null, mapDispatchToProps)(TasksItem)
+export default connect(mapStateToProps, mapDispatchToProps)(TasksItem)

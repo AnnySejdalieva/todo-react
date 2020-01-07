@@ -24,7 +24,8 @@ const initialState = {
     currentCategory: 1,
     showDone: false,
     modal: {},
-    search: ''
+    search: '',
+    loading: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -38,7 +39,7 @@ const reducer = (state = initialState, action) => {
         case 'CHANGE_SEARCH':
             return {
                 ...state,
-                search: action.payload
+                search: action.payload,
             };
         case 'CHANGE_MODAL':
             return {
@@ -61,10 +62,21 @@ const reducer = (state = initialState, action) => {
                 showDone: !state.showDone
             };
         case 'CHANGE_TASK':
+            console.log(action)
             return {
                 ...state,
                 tasks: [...action.payload]
             };
+        case 'START_LOADING':
+            return {
+                ...state,
+                loading: true
+            }
+        case 'FINISH_LOADING':
+            return {
+                ...state,
+                loading: false
+            }
         case 'CHANGE_CATEGORY':
             console.log(action)
             return {

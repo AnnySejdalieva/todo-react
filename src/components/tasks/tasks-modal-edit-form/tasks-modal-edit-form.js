@@ -10,7 +10,7 @@ class TasksModalEditForm extends Component {
         super(props)
         this.state = {
             newTitle: props.modal.title ? props.modal.title : '',
-            done: props.modal.done ? props.modal.done : '',
+            done: props.modal.done ? props.modal.done : false,
             category: props.modal.category ? props.modal.category : '',
             parent: props.modal.parent ? props.modal.parent : 0
         }
@@ -28,7 +28,7 @@ class TasksModalEditForm extends Component {
         ) {
             this.setState({
                 newTitle: this.props.modal.title,
-                done: this.props.modal.done ? this.props.modal.done : '',
+                done: this.props.modal.done ? this.props.modal.done : false,
                 category: this.props.modal.category ? this.props.modal.category : '',
                 parent: this.props.modal.parent ? this.props.modal.parent : 0
             })
@@ -59,6 +59,7 @@ class TasksModalEditForm extends Component {
             i.done = this.state.done
             i.category = this.state.category
             let arr = this.props.tasks.map(el=> el.id === i.id ? i : el)
+            console.log(arr)
             this.props.changeTask(arr)
         } else {
             i.parent = this.state.parent
@@ -69,7 +70,6 @@ class TasksModalEditForm extends Component {
         console.log(i)
     }
     render () {
-        console.log(this.props.changeCategory)
         return(
             <Modal
                 {...this.props}

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { debounceChangeSearch } from "../../../store/action";
+import {debounceChangeSearch} from "../../../store/action";
 import './search.css'
 import { connect } from "react-redux";
 import SearchInput from 'react-search-input'
-import { bindActionCreators } from "redux";
 
 class Search extends Component {
     constructor(props) {
@@ -41,9 +40,9 @@ const mapStateToProps = ({search}) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({
-        changeSearch: debounceChangeSearch()
-    }, dispatch)
+    return {
+        changeSearch: (payload) => dispatch(debounceChangeSearch(payload)(dispatch))
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search)
