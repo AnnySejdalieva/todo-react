@@ -18,11 +18,9 @@ class CategoryItem extends PureComponent {
     }
 
     addCategory () {
-        console.log('addItem')
         let keys = []
         this.props.categories.map((el)=>keys.push(el.id))
         let id = Math.max(...keys)
-        console.log(id+1)
         let bros = this.props.categories.filter((i)=> i.parent === this.props.item.id)
 
         this.props.addCategory({id: ++id, parent:this.props.item.id, title:this.props.item.title+' '+(bros.length+1)})
@@ -31,7 +29,6 @@ class CategoryItem extends PureComponent {
     render() {
         const { item, updateItems, deleteCategory, changeModal, categories, addCategory } = this.props
         let arr = categories.filter(el=>el.parent === item.id)
-        console.log(arr)
         return(
             <li className="category-item">
                 <div>

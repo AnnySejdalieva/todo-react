@@ -7,7 +7,6 @@ class CategoryList extends PureComponent {
     render() {
         let newArr = this.props.categories
             .filter(i => i.parent === 0)
-        console.log(this.props.categories)
             return(
                 <ul className="list-group list-group-flush">
                     {

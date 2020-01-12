@@ -26,7 +26,6 @@ class TasksItem extends Component {
         let i = this.props.task
         i.done = !i.done
         this.props.changeTask(i)
-        console.log(i)
     }
     render() {
         const { task } = this.props

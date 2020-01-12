@@ -59,7 +59,6 @@ class TasksModalEditForm extends Component {
             i.done = this.state.done
             i.category = this.state.category
             let arr = this.props.tasks.map(el=> el.id === i.id ? i : el)
-            console.log(arr)
             this.props.changeTask(arr)
         } else {
             i.parent = this.state.parent
@@ -67,7 +66,6 @@ class TasksModalEditForm extends Component {
             this.props.changeCategory(arr)
         }
         this.props.onHide()
-        console.log(i)
     }
     render () {
         return(

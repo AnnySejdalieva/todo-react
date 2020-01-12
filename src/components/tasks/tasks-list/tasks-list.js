@@ -29,7 +29,6 @@ class TasksList extends Component{
             this.state.a = 1;
             const filter = await this.filterSearch();
             this.setState({ items: [...filter], a: this.state.a + 1});
-            console.log('debounced', filter)
             this.props.finishLoading()
             return filter;
         }, 500);
@@ -57,7 +56,6 @@ class TasksList extends Component{
     async componentDidUpdate(prevProps) {
         if(this.props.search !== prevProps.search) {
             await this.debounced();
-            console.log('componentDidUpdate Props')
         }
         if(this.props.showDone !== prevProps.showDone ||
             this.props.currentCategory !== prevProps.currentCategory) {

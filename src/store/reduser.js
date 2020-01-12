@@ -62,7 +62,6 @@ const reducer = (state = initialState, action) => {
                 showDone: !state.showDone
             };
         case 'CHANGE_TASK':
-            console.log(action)
             return {
                 ...state,
                 tasks: [...action.payload]
@@ -78,7 +77,6 @@ const reducer = (state = initialState, action) => {
                 loading: false
             }
         case 'CHANGE_CATEGORY':
-            console.log(action)
             return {
                 ...state,
                 categories: [...action.payload]
