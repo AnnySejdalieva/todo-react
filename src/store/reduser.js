@@ -62,6 +62,7 @@ const reducer = (state = initialState, action) => {
                 showDone: !state.showDone
             };
         case 'CHANGE_TASK':
+            console.log(action.payload)
             return {
                 ...state,
                 tasks: [...action.payload]

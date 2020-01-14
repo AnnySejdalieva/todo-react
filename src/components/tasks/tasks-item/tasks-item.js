@@ -25,7 +25,8 @@ class TasksItem extends Component {
     onClickCheck () {
         let i = this.props.task
         i.done = !i.done
-        this.props.changeTask(i)
+        let arr = this.props.tasks.map(el=> el.id === i.id ? i : el)
+        this.props.changeTask(arr)
     }
     render() {
         const { task } = this.props
